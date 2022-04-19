@@ -7,6 +7,7 @@ import Favourites from "./pages/Favourites";
 import Searches from "./pages/Searches";
 import Selling from "./pages/Selling";
 import Detail from "./pages/Detail";
+import Results from "./pages/Results";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route index element={<Discover />} />
         <Route path="detail/:id" element={<Detail />} />
         <Route path="search" element={<Search />} />
+          <Route path="results" element={<Results />} />
         <Route path="selling" element={<Selling />} />
         <Route path="favourites" element={<Favourites />} />
         <Route path="searches" element={<Searches />} />

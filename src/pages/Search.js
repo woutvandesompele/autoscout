@@ -6,11 +6,18 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
+import {
+  useParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import ModelInput from '../components/ModelInput';
 
 const Search = () => {
   const [make, setMake] = React.useState('');
   const model = "";
+  let navigate = useNavigate();
+  let location = useLocation();
 
   const handleChange = (event) => {
     setMake(event.target.value);
@@ -69,7 +76,11 @@ const Search = () => {
     </Box>
 
     <Grid container justifyContent="center">
-      <Button variant="contained" color="secondary" sx={{ width: '80%' } }>
+      <Button variant="contained" color="secondary" sx={{ width: '80%' }}
+      onClick={() => {
+            navigate("/results" + location.search);
+          }}
+        >
         Search
       </Button>
     </Grid>

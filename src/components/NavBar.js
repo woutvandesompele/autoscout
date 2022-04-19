@@ -15,7 +15,7 @@ const NavBar = () => {
       <BottomNavigationAction label="Discover" to="/" icon={<HomeIcon />} />
       <BottomNavigationAction label="Search" to="/search" icon={<SearchIcon />} />
       <BottomNavigationAction label="Favourites" to="/favourites" icon={<StarBorderIcon />} />
-      <BottomNavigationAction label="Saved Searches" to="/searches" icon={<SavedSearchIcon />} />
+      <BottomNavigationAction label="Searches" to="/searches" icon={<SavedSearchIcon />} />
       <BottomNavigationAction label="Selling" to="/selling" icon={<BorderColorIcon />} />
     </BottomNavigation>
   </Paper>);
