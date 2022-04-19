@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Discover from "./pages/Discover";
 import Search from "./pages/Search";
 import Favourites from "./pages/Favourites";
-import SavedSearches from "./pages/Searches";
+import Searches from "./pages/Searches";
 import Selling from "./pages/Selling";
 import Detail from "./pages/Detail";
 
@@ -19,9 +19,8 @@ function App() {
         <Route path="search" element={<Search />} />
         <Route path="selling" element={<Selling />} />
         <Route path="favourites" element={<Favourites />} />
-        <Route path="searches" element={<SavedSearches />} />
+        <Route path="searches" element={<Searches />} />
       </Route>
-
     </Routes>
 
   );

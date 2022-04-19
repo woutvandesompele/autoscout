@@ -6,9 +6,11 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
+import ModelInput from '../components/ModelInput';
 
 const Search = () => {
   const [make, setMake] = React.useState('');
+  const model = "";
 
   const handleChange = (event) => {
     setMake(event.target.value);
@@ -32,6 +34,40 @@ const Search = () => {
         </Select>
       </FormControl>
     </Box>
+
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Model</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={model}
+          label="Model"
+          onChange={handleChange}
+        >
+          {(() =>
+            {switch (make) {
+            case 'Volkswagen':
+              return (
+              <>
+                <MenuItem value={"Golf"}>Golf</MenuItem>
+                <MenuItem value={"Polo"}>Polo</MenuItem>
+              </>
+              )
+            case 'BMW':
+              return (
+              <>
+                <MenuItem value={"3 Reeks"}>3 Reeks</MenuItem>
+              </>
+              )
+            default:
+              console.log(`Sorry, we are out of luck.`);
+          }
+        })()}
+        </Select>
+      </FormControl>
+    </Box>
+
     <Grid container justifyContent="center">
       <Button variant="contained" color="secondary" sx={{ width: '80%' } }>
         Search
