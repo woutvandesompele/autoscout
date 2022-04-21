@@ -12,12 +12,24 @@ import {
   useLocation,
 } from "react-router-dom";
 import ModelInput from '../components/ModelInput';
+import { useEffect } from 'react/cjs/react.production.min';
 
 const Search = () => {
   const [make, setMake] = React.useState('');
+  const [models, setModels] = React.useState([]);
   const model = "";
   let navigate = useNavigate();
   let location = useLocation();
+
+  useEffect(() => {
+    const availableModels = []
+    switch(make) {
+      case 'volksqges':
+        availableModels.push('golf');
+        break;
+    }
+    setModels(availableModels);
+  }, [make])
 
   const handleChange = (event) => {
     setMake(event.target.value);
