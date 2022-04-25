@@ -1,8 +1,11 @@
 import { ImageList, ImageListItem, Link} from "@mui/material";
 import Button from '@mui/material/Button';
+import FavSearch from "../components/FavSearch";
 
 const Searches = () => {
   const pics = ["GtwiBmtJvaU", "W9OKrxBqiZA", "ki4UgfcJfnY"];
+
+
   return (
     <>
     <Button variant="contained" color="primary">
@@ -15,6 +18,7 @@ const Searches = () => {
         </ImageListItem>
       ))}
     </ImageList>
+    <FavSearch></FavSearch>
   </>);
 }
 
