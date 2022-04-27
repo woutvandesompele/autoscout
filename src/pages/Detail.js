@@ -2,14 +2,23 @@ import { Skeleton, Stack, Typography, CardMedia } from "@mui/material";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Detail = () => {
   const { id } = useParams();
 
   const { isLoading, data: cars } = useQuery(["cars", id], async () => {
-    const data = await fetch(`http://localhost:1337/api/cars/${id}?populate=*`).then(r => r.json());
-    console.log(JSON.stringify({data}, null, 2));
+    const data = await fetch(`${backendUrl}/api/cars/${id}?populate=*`).then(r => r.json());
+    // console.log(JSON.stringify({data}, null, 2));
     return data;
   });
+
+  const userId = localStorage.getItem('userId');
+  console.log(userId);
+
+/*
+  id
+*/
 
   console.log(cars);
 

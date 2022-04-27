@@ -14,11 +14,13 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 
 const Search = () => {
+  const queryClient = useQueryClient();
   const [make, setMake] = useState('');
-  const [model, setModel] = useState([]);
+  const [model, setModel] = useState('');
+  // const [models, setModels] = useState([]);
   let navigate = useNavigate();
   let location = useLocation();
   const params = { make: make, model: model };
@@ -42,20 +44,38 @@ const Search = () => {
     return data;
   });
 
+  brands = useQuery("brands", async () => {
+    const where = encodeURIComponent(JSON.stringify({
+          "Year": {
+            "$gt": 2012
+          }
+    }));
+    const data = await fetch(
+          `https://parseapi.back4app.com/classes/Carmodels_Car_Model_List?limit=50?keys=Make&order=Make&where=${where}`,
+          {
+            headers: {
+              'X-Parse-Application-Id': 'qPjPSDpUMVQonypUKZINQyZc5UKSJVMarbokxtUS', // This is your app's application id
+              'X-Parse-REST-API-Key': 'iV8tWZzLHBFNzYQtlMmdnPyaOYCDCCXFtI6soCCO', // This is your app's REST API key
+            }
+          }
+        ).then(r => r.json());
+    return data;
+  });
+
   let enable = false;
 
   if (make) {
-    console.log("changed to true")
+    // console.log("changed to true")
     enable = true;
   } else {
-    console.log("changed to false")
+    // console.log("changed to false")
     enable = false;
   }
 
-  const { data: models, isSuccess} = useQuery("models", async () => {
-  console.log("Excecuted this code")
+  const { data: models, isSuccess, isLoading, error} = useQuery(["models", make], async () => {
+  // console.log("Excecuted this code")
   const where = encodeURIComponent(JSON.stringify({
-    "Make": "Audi",
+    "Make": make,
     "Year": {
       "$gt": 2012
     }
@@ -69,12 +89,12 @@ const Search = () => {
         }
       }
       ).then(r => r.json());
-      console.log("Excecuted this code")
-      console.log(JSON.stringify({data}, null, 2));
+      // console.log("Excecuted this code")
+      // console.log(JSON.stringify({data}, null, 2));
   return data;
   }, {enabled: enable});
 
-console.log(models)
+// console.log(models)
   
   if (brands.data === undefined) {
     return <CircularProgress />
@@ -82,6 +102,8 @@ console.log(models)
   
   //  || typeof models.data.results === 'undefined'
   //  && models.data.results !== undefined
+
+  if (isLoading) return "...loading";
   
   const unique = [...new Set(brands.data.results.map(brand => brand.Make))];
 
@@ -91,13 +113,18 @@ console.log(models)
   //   const unique2 = [...new Set(models.data.results.map(model => model.Model))];
   // }
 
-
+  const handleMakeChange = e => {
+    setMake(e.target.value)
+    queryClient.invalidateQueries(["models", make])
+    // setModels(e.target.value);
+    // useEffect??
+  }
 
   if (brands.data !== undefined) {
   return (
     <>
-    {/* {isLoading && <CircularProgress />}
-    {error && <Alert severity="error">Something went wrong</Alert>} */}
+    {isLoading && <CircularProgress />}
+    {error && <Alert severity="error">Something went wrong</Alert>}
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Make</InputLabel>
@@ -106,7 +133,7 @@ console.log(models)
           id="demo-simple-select"
           label="Make"
           value={make}
-          onChange={e => setMake(e.target.value)}
+          onChange={handleMakeChange}
         >
           {unique.map((brand) => (
             <MenuItem value={brand}>{brand}</MenuItem>
@@ -115,6 +142,7 @@ console.log(models)
       </FormControl>
     </Box>
 
+    {/* {console.log(models)} */}
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Model</InputLabel>
@@ -125,13 +153,11 @@ console.log(models)
           value={model}
           onChange={e => setModel(e.target.value)}
         >
-          {/* {isSuccess ? 
-            // const propertyValues = Object.values(person);
-            unique2.map((model) => (
-              <MenuItem value={model.Make}>{model.Make}</MenuItem>
+          {isSuccess && models.results.map((model) => (
+              <MenuItem value={model.Model}>{model.Model}</MenuItem>
             ))
-          : */}
-          <MenuItem value="R8">R8</MenuItem>
+          // <MenuItem value="R8">R8</MenuItem>
+          }
         </Select>
       </FormControl>
     </Box>
@@ -160,6 +186,15 @@ console.log(models)
 }
 
 export default Search;
+
+
+
+
+
+//useEffect
+// //useState -> state in state lik voorbeeld
+// //invalidate queries
+// //conditional rendering
 
 
 

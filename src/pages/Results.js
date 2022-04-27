@@ -17,10 +17,12 @@ function Results() {
   let [searchParams, setSearchParams] = useSearchParams()
   const make = searchParams.get("make")
   const model = searchParams.get("model")
-  console.log(queryParams)
-  
-  const { isLoading, error, data: cars } = useQuery("cars", async () => {
-    const data = await fetch(`${backendUrl}/api/cars?populate=*`).then(r => r.json());
+  // console.log(make)
+  // console.log(model)
+                                                            //dit toevoegen
+  const { isLoading, error, data: cars } = useQuery(["cars", make, model], async () => {
+    const data = await fetch(`${backendUrl}/api/cars?filters[make][$eq]=${make}&filters[model][$eq]=${model}&populate=*`).then(r => r.json());
+                                                //STRAPI REST API FILTER 
     return data;
   });
   console.log(cars);

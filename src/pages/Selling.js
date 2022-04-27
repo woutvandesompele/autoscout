@@ -1,5 +1,6 @@
-import { Stack } from "@mui/material";
+import { Stack, Grid, Button } from "@mui/material";
 import PictureGrid from "../components/PictureGrid";
+import AddCar from '../components/AddCar';
 
 const Selling = () => {
   const pics = [
@@ -17,11 +18,21 @@ const Selling = () => {
   ];
 
   return (<Stack>
-    <img
+    {/* <img
       src={`https://source.unsplash.com/GGDWcJWyR7c/250x250`}
       alt=""
-    />
-    <PictureGrid pics={pics} />
+    /> */}
+    {/* <PictureGrid pics={pics} /> */}
+    <AddCar/>
+    {/* <Grid container justifyContent="center">
+      <Button variant="contained" color="secondary" sx={{ width: '80%' }}
+      onClick={() => {
+            
+          }}
+        >
+        create
+      </Button>
+    </Grid> */}
   </Stack>);
 }
 
