@@ -4,6 +4,8 @@ import { styled } from '@mui/material/styles';
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Input = styled('input')({
   display: 'none',
 });
@@ -23,7 +25,7 @@ const AddCar = () => {
     delete postData.image;
     formData.append("data", JSON.stringify(postData));
 
-    return await fetch("http://localhost:1337/api/cars", {
+    return await fetch(`${backendUrl}/api/cars`, {
       method: "POST",
       headers: {
         // "Content-Type": "multipart/form-data"
