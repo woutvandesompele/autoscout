@@ -11,7 +11,7 @@ const Input = styled('input')({
 });
 
 const AddCar = () => {
-  const { handleSubmit, formState: { errors }, register, control, reset, watch } = useForm();
+  const { handleSubmit, formState: { errors }, register, reset, watch } = useForm();
 
   const queryClient = useQueryClient();
 
@@ -75,6 +75,22 @@ const AddCar = () => {
           required: 'Please add a model'
         })} />
 
+
+    {/* <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel type="number" htmlFor="outlined-adornment-amount">Price up to</InputLabel>
+          <OutlinedInput
+            type="number"
+            labelId="maxPrice"
+            id="maxPrice"
+            label="maxPrice"
+            // value={maxPrice}
+            // onChange={e => setMaxPrice(e.target.value)}
+            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          />
+      </FormControl>
+    </Box> */}
+
       <Stack direction="row" spacing={2} alignItems="center">
         <label htmlFor="contained-button-file">
           <Input accept="image/*" id="contained-button-file" type="file"  {...register("image")} />
@@ -87,7 +103,7 @@ const AddCar = () => {
       <LoadingButton loading={mutation.isLoading}
         loadingIndicator="Adding car" type="submit" variant="contained">Add car</LoadingButton>
 
-      <Snackbar open={mutation.isSuccess} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} autoHideDuration={3000} onClose={handleCloseSnackbar}>
+      <Snackbar open={mutation.isSuccess} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} autoHideDuration={2000} onClose={handleCloseSnackbar}>
         <Alert severity="success" sx={{ width: '100%' }}>
           Car added
         </Alert>

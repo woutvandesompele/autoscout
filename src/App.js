@@ -15,15 +15,15 @@ function App() {
 
     <Routes>
       <Route path="/" element={<Layout/>} >
-        <Route index element={<Login />} />
+        <Route exact path="/connect/:providerName/redirect" element={<LoginRedirect/>} />
+      <Route index element={<Login />} />
         <Route path="discover" element={<Discover />} />
         <Route path="search" element={<Search />} />
         <Route path="detail/:id" element={<Detail />} />
         <Route path="results" element={<Results />} />
         <Route path="selling" element={<Selling />} />
-        <Route path="favourites" element={<Favourites />} />
+        <Route path="favourites" element={<Favourites />} /> 
         <Route path="searches" element={<Searches />} />
-        <Route exact path="/connect/:providerName/redirect" element={<LoginRedirect/>} />
       </Route>
     </Routes>
 

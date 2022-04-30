@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 const CarCard = ({ cars }) => {
   const navigate = useNavigate();
-  console.log(cars.attributes.Cover.data)
+  // console.log(cars)
   return (
 
     <Card sx={{ maxWidth: 345 }} component={Link} to={`/detail/${cars.id}`}>

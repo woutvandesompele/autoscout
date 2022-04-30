@@ -17,15 +17,53 @@ function Results() {
   let [searchParams, setSearchParams] = useSearchParams()
   const make = searchParams.get("make")
   const model = searchParams.get("model")
+  const maxPrice = searchParams.get("maxPrice")
+  const maxKm = searchParams.get("maxKm")
+  const minYear = searchParams.get("minYear")
+  const maxYear = searchParams.get("maxYear")
+  let modelSearch;
+  let maxPriceSearch;
+  let maxKmSearch;
+  let minYearSearch;
+  let maxYearSearch;
   // console.log(make)
   // console.log(model)
-                                                            //dit toevoegen
-  const { isLoading, error, data: cars } = useQuery(["cars", make, model], async () => {
-    const data = await fetch(`${backendUrl}/api/cars?filters[make][$eq]=${make}&filters[model][$eq]=${model}&populate=*`).then(r => r.json());
-                                                //STRAPI REST API FILTER 
+  // const qs = require('qs');
+  // const query = qs.stringify({
+  //   filters: {
+  //     make: {
+  //       $eq: make,
+  //     },
+  //     model: {
+  //       $eq: model,
+  //     },
+  //   },
+  // }, {
+  //   encodeValuesOnly: true,
+  // });
+
+  if (model) {
+    modelSearch = `&filters[model][$eq]=${model}`;
+  } else {modelSearch = "";}
+  if (maxPrice) {
+    maxPriceSearch = `&filters[price][$lt]=${maxPrice}`;
+  } else {maxPriceSearch = "";}
+  if (maxKm) {
+    maxKmSearch = `&filters[mileage][$lt]=${maxKm}`;
+  } else {maxKmSearch = "";}
+  if (minYear) {
+    minYearSearch = `&filters[year][$gt]=${minYear}`;
+  } else {minYearSearch = "";}
+  if (maxYear) {
+    maxYearSearch = `&filters[year][$lte]=${maxYear}`;
+  } else {maxYearSearch = "";}
+
+  const { isLoading, error, data: cars } = useQuery(["cars", make, modelSearch, maxPriceSearch, ], async () => {
+    const data = await fetch(`${backendUrl}/api/cars?filters[make][$eq]=${make}${modelSearch}${maxPriceSearch}${maxKmSearch}${minYearSearch}${maxYearSearch}&populate=*`).then(r => r.json());
     return data;
   });
   console.log(cars);
+  console.log(`${backendUrl}/api/cars?filters[make][$eq]=${make}${model}${maxPriceSearch}&populate=*`);
 
   return (
     <Container>

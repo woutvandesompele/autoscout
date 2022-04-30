@@ -1,8 +1,10 @@
 import { Skeleton, Stack, Typography, CardMedia } from "@mui/material";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import AddFavorite from "../components/AddFavorite";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
+// console.log(backendUrl)
 
 const Detail = () => {
   const { id } = useParams();
@@ -12,15 +14,6 @@ const Detail = () => {
     // console.log(JSON.stringify({data}, null, 2));
     return data;
   });
-
-  const userId = localStorage.getItem('userId');
-  console.log(userId);
-
-/*
-  id
-*/
-
-  console.log(cars);
 
   return (<Stack>
     {isLoading ? <Skeleton /> :     
@@ -32,6 +25,9 @@ const Detail = () => {
     <Typography variant="h4" component="h2">{isLoading ? <Skeleton /> : `${cars.data.attributes.Make} ${cars.data.attributes.Model}`}</Typography>
     <Typography>{isLoading ? <Skeleton /> : `${cars.data.attributes.Mileage} Miles`}</Typography>
     <Typography>{isLoading ? <Skeleton /> : `First Registration: ${cars.data.attributes.Year}`}</Typography>
+
+    {isLoading ? "" : <AddFavorite carId={cars.data.id}/>}
+
     {/* <Typography variant="caption">{isLoading ? <Skeleton /> : `Average rating: ${cars.data.attributes.rating} out of 5`}</Typography>
     {
       isLoading ? <Skeleton variant="rectangular" width={210} height={200} /> : cars.data.attributes.reviews.data.map(review => <Typography key={review.id}>{review.attributes.message}</Typography>)
