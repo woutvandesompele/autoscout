@@ -17,9 +17,6 @@ const Input = styled('input')({
 
 const AddCar = () => {
 
-  let usernameFetch 
-  usernameFetch = localStorage.getItem('username');
-  const username = usernameFetch.toString();
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   let brands = [];
@@ -38,7 +35,6 @@ const AddCar = () => {
     const postData = { ...data }
     delete postData.image;
     formData.append("data", JSON.stringify(postData));
-    console.log(data);
 
     return await fetch(`${backendUrl}/api/cars`, {
       method: "POST",
@@ -148,7 +144,7 @@ const AddCar = () => {
   return (
     <Stack spacing={4} sx={{ flex: 1 }} as="form" noValidate onSubmit={handleSubmit(onSubmit)}>
       
-      <Box sx={{ minWidth: 120 }}>
+      {/* <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Make</InputLabel>
           <Select
@@ -158,7 +154,9 @@ const AddCar = () => {
             label="Make"
             required
             error={!!errors?.Make}
-            {...register("Make")}
+            {...register("Model", {
+              // required: 'Model is required'
+            })}
             value={make}
             onChange={handleMakeChange}
           >
@@ -169,7 +167,8 @@ const AddCar = () => {
         </FormControl>
       </Box>
 
-      <Box sx={{ minWidth: 120 }}>
+      {/* {console.log(models)} */}
+      {/* <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Model</InputLabel>
           <Select
@@ -180,7 +179,7 @@ const AddCar = () => {
             required
             error={!!errors?.Model}
             {...register("Model", {
-              required: 'Model is required'
+              // required: 'Model is required'
             })}
             value={model}
             onChange={e => setModel(e.target.value)}
@@ -188,10 +187,11 @@ const AddCar = () => {
             {isSuccess && unique2.map((model) => (
                 <MenuItem key={model} value={model}>{model}</MenuItem>
               ))
+            // <MenuItem value="R8">R8</MenuItem>
             }
           </Select>
         </FormControl>
-      </Box>
+      </Box> */}
 
       <TextField
         disabled={mutation.isLoading}
@@ -224,48 +224,20 @@ const AddCar = () => {
         label="Year"
         // value={value}
         // onChange={(e) => {
-          //   var value = parseInt(e.target.value, 10);
+        //   var value = parseInt(e.target.value, 10);
 
         //   if (value > max) value = max;
         //   if (value < min) value = min;
 
         //   setValue(value);
         // }}
-        required
+        // required
         error={!!errors?.Year}
         helperText={errors?.Year?.message}
         {...register("Year", {
-          required: 'Please fill in the first registration'
+          // required: 'Please fill in the first registration'
         })} />
 
-      <Box sx={{ display: 'none' }}>
-        <input 
-        type="text" 
-        value={username} 
-        readOnly
-        disabled={mutation.isLoading}
-        id="username"
-        label="username"
-        required
-        // error={!!errors?.username}
-        // helperText={errors?.username?.message}
-        {...register("username", {
-          required: 'Please add a username'
-        })} ></input>
-      </Box>
-
-        {/* <TextField
-          disabled={mutation.isLoading}
-          type="number"
-          id="username"
-          label="username"
-          required
-          value={username}
-          error={!!errors?.username}
-          helperText={errors?.username?.message}
-          {...register("username", {
-            required: 'Please add username'
-          })} /> */}
 
 
 
