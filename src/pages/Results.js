@@ -13,7 +13,7 @@ function Results() {
   const queryParams = queryString.parse(window.location.search)
   let [searchParams, setSearchParams] = useSearchParams()
   const url = window.location.href;
-  console.log(url);
+  // console.log(url);
   const make = searchParams.get("make")
   const model = searchParams.get("model")
   const maxPrice = searchParams.get("maxPrice")
@@ -65,8 +65,8 @@ function Results() {
     const data = await fetch(`${backendUrl}/api/cars?${makeSearch}${modelSearch}${maxPriceSearch}${maxKmSearch}${minYearSearch}${maxYearSearch}&populate=*`).then(r => r.json());
     return data;
   });
-  // console.log(cars);
-  // console.log(`${backendUrl}/api/cars?${makeSearch}${make}${model}${maxPriceSearch}&populate=*`);
+  console.log(cars);
+  console.log(`${backendUrl}/api/cars?${makeSearch}${modelSearch}${maxPriceSearch}${maxKmSearch}${minYearSearch}${maxYearSearch}&populate=*`);
 
   return (
     <Container>

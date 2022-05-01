@@ -9,6 +9,11 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const Detail = () => {
   const { id } = useParams();
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  // const price = numberWithCommas(cars.attributes.Price)
+
   const { isLoading, data: cars } = useQuery(["cars", id], async () => {
     const data = await fetch(`${backendUrl}/api/cars/${id}?populate=*`).then(r => r.json());
     // console.log(JSON.stringify({data}, null, 2));

@@ -4,6 +4,10 @@ import empty  from '../assets/img/empty.jpg';
 
 const CarCard = ({ cars }) => {
   const navigate = useNavigate();
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  const price = numberWithCommas(cars.attributes.Price)
   // console.log(cars)
   return (
 
@@ -27,7 +31,7 @@ const CarCard = ({ cars }) => {
           {cars.attributes.Make} {cars.attributes.Model}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {cars.attributes.Mileage} Miles
+          €{price}
         </Typography>
       </CardContent>
     </Card>

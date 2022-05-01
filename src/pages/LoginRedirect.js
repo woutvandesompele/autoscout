@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { CardMedia } from "@mui/material";
+import autoscout  from '../assets/img/autoscout.jpg';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -36,7 +38,7 @@ const LoginRedirect = (props) => {
         // in strapi maak je profile aan met een username en userid
 
         // en een linked relation voor je favourites
-        
+
         
         setText('You have been successfully logged in. You will be redirected in a few seconds...');
         setTimeout(() => history('/discover'), 3000); // Redirect to homepage after 3 sec
@@ -47,7 +49,14 @@ const LoginRedirect = (props) => {
       });
   }, [history, location.search, params.providerName]);
 
-  return <p>{text}</p>
+  return (       
+        <CardMedia
+          component="img"
+          alt={autoscout}
+          height="140"
+          image={autoscout}
+        />)
+        // <p>{text}</p>
 };
 
 export default LoginRedirect;
