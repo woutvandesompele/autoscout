@@ -2,6 +2,7 @@ import { Skeleton, Stack, Typography, CardMedia } from "@mui/material";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import AddFavorite from "../components/AddFavorite";
+import empty  from '../assets/img/empty.jpg';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 // console.log(backendUrl)
@@ -9,9 +10,9 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const Detail = () => {
   const { id } = useParams();
 
-  const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
+  // const numberWithCommas = (x) => {
+  //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  // }
   // const price = numberWithCommas(cars.attributes.Price)
 
   const { isLoading, data: cars } = useQuery(["cars", id], async () => {
@@ -22,12 +23,22 @@ const Detail = () => {
 
   return (<Stack>
     {isLoading ? <Skeleton /> :     
-    <CardMedia
-      component="img"
-      alt={cars.data.attributes.Cover.data.attributes.alternativeText}
-      image={cars.data.attributes.Cover.data.attributes.formats.small.url}
-    />}
-    <Typography variant="h4" component="h2">{isLoading ? <Skeleton /> : `${cars.data.attributes.Make} ${cars.data.attributes.Model}`}</Typography>
+      <>{cars.attributes ?
+        <CardMedia
+          component="img"
+          alt={cars.attributes.Cover.data.attributes.alternativeText}
+          height="140"
+          image={cars.attributes.Cover.data.attributes.formats.small.url}
+        /> :
+        <CardMedia
+          component="img"
+          alt={empty}
+          height="140"
+          image={empty}
+        />
+      }</>}
+    <Typography variant="h3" component="h2">{isLoading ? <Skeleton /> : `${cars.data.attributes.Make}`}</Typography>
+    <Typography variant="h3" component="h2">{isLoading ? <Skeleton /> : `${cars.data.attributes.Model}`}</Typography>
     <Typography>{isLoading ? <Skeleton /> : `${cars.data.attributes.Mileage} Miles`}</Typography>
     <Typography>{isLoading ? <Skeleton /> : `First Registration: ${cars.data.attributes.Year}`}</Typography>
 

@@ -4,10 +4,10 @@ import empty  from '../assets/img/empty.jpg';
 
 const CarCard = ({ cars }) => {
   const navigate = useNavigate();
-  // const numberWithCommas = (x) => {
-  //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  // }
-  // const price = numberWithCommas(cars.attributes.Price)
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  const price = numberWithCommas(cars.attributes.Price)
   // console.log(cars)
   return (
 
