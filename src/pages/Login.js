@@ -37,14 +37,14 @@ const Login = (props) => {
   let text;
 
   if (isLogged) {
-    text = `Welcome ${localStorage.getItem('username')}, you are connected!`;
+    // text = `Welcome ${localStorage.getItem('username')}, you are connected!`;
   } else {
     text = 'You are not connected. Please log in.';
   }
 
   return <div>
-    <p>{text}</p>
     {buttons}
+    {/* <p>{text}</p> */}
   </div>;
 }
 

@@ -21,6 +21,7 @@ function Results() {
   const maxKm = searchParams.get("maxKm")
   const minYear = searchParams.get("minYear")
   const maxYear = searchParams.get("maxYear")
+  let makeSearch;
   let modelSearch;
   let maxPriceSearch;
   let maxKmSearch;
@@ -42,6 +43,9 @@ function Results() {
   //   encodeValuesOnly: true,
   // });
 
+  if (make) {
+    makeSearch = `filters[make][$eq]=${make}`;
+  } else {makeSearch = "";}
   if (model) {
     modelSearch = `&filters[model][$eq]=${model}`;
   } else {modelSearch = "";}
@@ -58,12 +62,12 @@ function Results() {
     maxYearSearch = `&filters[year][$lte]=${maxYear}`;
   } else {maxYearSearch = "";}
 
-  const { isLoading, error, data: cars } = useQuery(["cars", make, modelSearch, maxPriceSearch, ], async () => {
-    const data = await fetch(`${backendUrl}/api/cars?filters[make][$eq]=${make}${modelSearch}${maxPriceSearch}${maxKmSearch}${minYearSearch}${maxYearSearch}&populate=*`).then(r => r.json());
+  const { isLoading, error, data: cars } = useQuery(["cars", makeSearch, modelSearch, maxPriceSearch, maxKmSearch, minYearSearch, maxYearSearch], async () => {
+    const data = await fetch(`${backendUrl}/api/cars?${makeSearch}${modelSearch}${maxPriceSearch}${maxKmSearch}${minYearSearch}${maxYearSearch}&populate=*`).then(r => r.json());
     return data;
   });
   console.log(cars);
-  console.log(`${backendUrl}/api/cars?filters[make][$eq]=${make}${model}${maxPriceSearch}&populate=*`);
+  console.log(`${backendUrl}/api/cars?${makeSearch}${make}${model}${maxPriceSearch}&populate=*`);
 
   return (
     <Container>

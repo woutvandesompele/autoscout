@@ -4,7 +4,7 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const LoginRedirect = (props) => {
-  const [text, setText] = useState('Loading...');
+  const [text, setText] = useState('Logging in... This can take a few seconds...');
   const location = useLocation();
   const params = useParams();
   const history = useNavigate();
@@ -38,7 +38,7 @@ const LoginRedirect = (props) => {
         
         
         setText('You have been successfully logged in. You will be redirected in a few seconds...');
-        setTimeout(() => history('/'), 3000); // Redirect to homepage after 3 sec
+        setTimeout(() => history('/discover'), 3000); // Redirect to homepage after 3 sec
       })
       .catch(err => {
         console.log(err);
