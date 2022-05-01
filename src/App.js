@@ -16,7 +16,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>} >
         <Route exact path="/connect/:providerName/redirect" element={<LoginRedirect/>} />
-      <Route index element={<Discover />} />
+      <Route index element={<Login />} />
         <Route path="discover" element={<Discover />} />
         <Route path="search" element={<Search />} />
         <Route path="detail/:id" element={<Detail />} />

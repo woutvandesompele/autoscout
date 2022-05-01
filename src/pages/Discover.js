@@ -15,7 +15,7 @@ const props = [
   {link:"?make=Volkswagen&model=Tiguan", title:"Exciting suv's", img:suv},
   {link:"?make=Ford&model=Focus", title:"Popular family cars", img:family},
   {link:"?make=Tesla", title:"Popular electric cars", img:electric},
-  {link:"?price", title:"Your first car", img:firstcar},
+  {link:"?make=Volkswagen&maxPrice=10000", title:"Your first car", img:firstcar},
   {link:"?make=Ford&model=Focus", title:"Cheap road trip cars", img:trip}
 ];
 

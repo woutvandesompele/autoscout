@@ -6,8 +6,8 @@ const FavSearchCard = ({ search }) => {
 //   console.log(search.id)
 //   console.log(search.attributes.Search)
   const url = search.attributes.Search
-  const newUrl = url.replace("https://autoscout-react.herokuapp.com/results?", "");
-  const newUrl2 = newUrl.replace("http://localhost:3000/results?", "");
+  const newUrl = url.replace("http://localhost:3000/results?", "https://autoscout-react.herokuapp.com/results?");
+  const newUrl2 = newUrl.replace("https://autoscout-react.herokuapp.com/results?", "");
   const newUrl3 = newUrl2.replace(/&/g, " - ");
   console.log(newUrl2);
 
@@ -16,7 +16,7 @@ const FavSearchCard = ({ search }) => {
   }
 
   return (
-    <a href={url}>
+    <a href={newUrl}>
       <Card sx={{ maxWidth: 340 }} >
         <CardContent>
             <Typography gutterBottom >
