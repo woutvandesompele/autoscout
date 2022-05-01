@@ -12,8 +12,9 @@ const MediaCard = (props) => {
 
     const image = props.props.img
     const title = props.props.title
+    const link = props.props.link
   return (
-  <Box key={title}>
+  <Box>
     <Card 
     //       boxShadow: 3,
     //       width: '3rem',
@@ -27,7 +28,7 @@ const MediaCard = (props) => {
     //       textAlign: 'center',
     //       fontSize: '0.875rem',
     //       fontWeight: '700',  }} 
-    component={Link} to={`/results${props.props.link}`}
+    component={Link} to={`/results${link}`}
     underline="none"
     // sx={    {    
     //       border: 10
@@ -36,11 +37,11 @@ const MediaCard = (props) => {
       <CardMedia
         component="img"
         image={(image)}
-        alt={props.props.title}
+        alt={title}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.props.title}
+          {title}
         </Typography>
       </CardContent>
     </Card>

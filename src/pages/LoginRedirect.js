@@ -25,6 +25,7 @@ const LoginRedirect = (props) => {
         // Now saving the jwt to use it for future authenticated requests to Strapi
         localStorage.setItem('jwt', res.jwt);
         localStorage.setItem('username', res.user.username);
+        
         localStorage.setItem('userId', res.user.id);
 
         // TODO: check of er al een profile met die user:id is? (fetch van profile...)

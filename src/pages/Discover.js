@@ -23,7 +23,7 @@ const Discover = () => {
   return (
     <>
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-      {props.map(props => <Grid item xs={6}><MediaCard key={props.title} props={props}/></Grid>)}
+      {props.map(props => <Grid item xs={6} key={props.title}><MediaCard props={props}/></Grid>)}
     </Grid>
   </>);
 };

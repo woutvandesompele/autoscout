@@ -1,20 +1,19 @@
-import { Alert, CircularProgress, Container, Stack, Typography, Link } from '@mui/material';
+import { Alert, CircularProgress, Container, Stack, Typography, Link, Button } from '@mui/material';
 import { useQuery } from 'react-query';
 import { useSearchParams, useNavigate } from "react-router-dom"
 import queryString from "query-string"
 import CarCard from '../components/CarCard';
+import AddFavSearch from '../components/AddFavSearch';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Results() {
-
-  // const history = useHistory();
-  // function handleClick() {
-  //   history.push(`/detail/${id}`);
-  // }
   const navigate = useNavigate();
   const queryParams = queryString.parse(window.location.search)
   let [searchParams, setSearchParams] = useSearchParams()
+  const url = window.location.href;
+  console.log(url);
   const make = searchParams.get("make")
   const model = searchParams.get("model")
   const maxPrice = searchParams.get("maxPrice")
@@ -66,14 +65,16 @@ function Results() {
     const data = await fetch(`${backendUrl}/api/cars?${makeSearch}${modelSearch}${maxPriceSearch}${maxKmSearch}${minYearSearch}${maxYearSearch}&populate=*`).then(r => r.json());
     return data;
   });
-  console.log(cars);
-  console.log(`${backendUrl}/api/cars?${makeSearch}${make}${model}${maxPriceSearch}&populate=*`);
+  // console.log(cars);
+  // console.log(`${backendUrl}/api/cars?${makeSearch}${make}${model}${maxPriceSearch}&populate=*`);
 
   return (
     <Container>
       <Typography variant="h2" component="h1">Results</Typography>
       {isLoading && <CircularProgress />}
       {error && <Alert severity="error">Something went wrong</Alert>}
+      <Button onClick={ () => navigate(-1) }><ArrowBackOutlinedIcon/></Button>
+      <AddFavSearch url={window.location.href}/>
       <Stack spacing={4} direction="row">
         <Stack spacing={2} sx={{ flex: 1 }}>
           {cars && cars.data.map(cars => <CarCard key={cars.id} cars={cars} component={Link} to={`/detail/${cars.id}`}/>)}

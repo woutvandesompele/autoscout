@@ -1,18 +1,25 @@
 import { Card, CardContent, CardMedia, Typography, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom"
+import empty  from '../assets/img/empty.jpg';
 
 const CarCard = ({ cars }) => {
   const navigate = useNavigate();
   // console.log(cars)
   return (
 
-    <Card sx={{ maxWidth: 345 }} component={Link} to={`/detail/${cars.id}`}>
-      {cars.attributes.Cover.data &&
+    <Card sx={{ maxWidth: 345 }} component={Link} to={`/detail/${cars.id}`} underline="none">
+      {cars.attributes.Cover.data ?
         <CardMedia
           component="img"
           alt={cars.attributes.Cover.data.attributes.alternativeText}
           height="140"
           image={cars.attributes.Cover.data.attributes.formats.small.url}
+        /> :
+        <CardMedia
+          component="img"
+          alt={empty}
+          height="140"
+          image={empty}
         />
       }
       <CardContent>
