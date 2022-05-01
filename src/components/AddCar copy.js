@@ -159,13 +159,11 @@ const AddCar = () => {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             label="Make"
-            // required
+            required
             error={!!errors?.Make}
-            {...register("Make"
-            // , {
-            //   required: 'Make is required'
-            // }
-            )}
+            {...register("Make", {
+              required: 'Make is required'
+            })}
             value={make}
             onChange={handleMakeChange}
           >

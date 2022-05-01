@@ -45,6 +45,9 @@ function Favourites() {
     return data;
   });
   console.log(cars)
+//   function isEmpty(cars) {
+//     return Object.keys(cars).length === 0;
+// }
 
   return (
     <Container>

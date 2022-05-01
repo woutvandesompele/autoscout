@@ -118,6 +118,7 @@ const Search = () => {
           value={make}
           onChange={handleMakeChange}
         >
+          <MenuItem key="" value=""></MenuItem>
           {unique.map((brand) => (
             <MenuItem key={brand} value={brand}>{brand}</MenuItem>
           ))}
@@ -136,6 +137,7 @@ const Search = () => {
           value={model}
           onChange={e => setModel(e.target.value)}
         >
+          <MenuItem key="" value=""></MenuItem>
           {isSuccess && unique2.map((model) => (
               <MenuItem key={model} value={model}>{model}</MenuItem>
             ))
@@ -155,6 +157,7 @@ const Search = () => {
           value={maxPrice}
           onChange={e => setMaxPrice(e.target.value)}
         >
+          <MenuItem key="" value=""></MenuItem>
           <MenuItem key="1000" value="1000">€1.000</MenuItem>
           <MenuItem key="2500" value="2500">€2.500</MenuItem>
           <MenuItem key="5000" value="5000">€5.000</MenuItem>
@@ -179,6 +182,7 @@ const Search = () => {
           value={maxKm}
           onChange={e => setMaxKm(e.target.value)}
         >
+          <MenuItem key="" value=""></MenuItem>
           <MenuItem key="1000" value="1000">1.000</MenuItem>
           <MenuItem key="5000" value="5000">5.000</MenuItem>
           <MenuItem key="10000" value="10000">10.000</MenuItem>
